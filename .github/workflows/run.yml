@@ -1,0 +1,28 @@
+name: run
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        s: [ttang, modetour, ybtour, onlinetour, hanatour]
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      K: ${{ secrets.K }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass env:K -in a.bin -out a.tgz
+          tar xzf a.tgz
+          pip install -q httpx python-dotenv
+          python3 run.py ${{ matrix.s }} out.gz
+      - run: openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:K -in out.gz -out data.bin
+      - run: |
+          gh release view p-${{ matrix.s }} >/dev/null 2>&1 || gh release create p-${{ matrix.s }} --title p-${{ matrix.s }} --notes ""
+          gh release upload p-${{ matrix.s }} data.bin --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
