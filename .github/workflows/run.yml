@@ -8,7 +8,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        s: [ttang, modetour, ybtour, onlinetour, hanatour]
+        include:
+          - {s: ttang, p: "all", t: p-ttang-all}
+          - {s: modetour, p: "0/3", t: p-modetour-0of3}
+          - {s: modetour, p: "1/3", t: p-modetour-1of3}
+          - {s: modetour, p: "2/3", t: p-modetour-2of3}
+          - {s: ybtour, p: "PKG@0/3", t: p-ybtour-PKG-0of3}
+          - {s: ybtour, p: "PKG@1/3", t: p-ybtour-PKG-1of3}
+          - {s: ybtour, p: "PKG@2/3", t: p-ybtour-PKG-2of3}
+          - {s: ybtour, p: "HYM", t: p-ybtour-HYM}
+          - {s: ybtour, p: "FIT", t: p-ybtour-FIT}
+          - {s: ybtour, p: "DMT", t: p-ybtour-DMT}
+          - {s: ybtour, p: "GLF+CRS+YBP", t: p-ybtour-GLF_CRS_YBP}
+          - {s: onlinetour, p: "wc", t: p-onlinetour-wc}
+          - {s: onlinetour, p: "wd", t: p-onlinetour-wd}
+          - {s: onlinetour, p: "wf", t: p-onlinetour-wf}
+          - {s: onlinetour, p: "wm", t: p-onlinetour-wm}
+          - {s: onlinetour, p: "wk", t: p-onlinetour-wk}
+          - {s: hanatour, p: "FP@0/3", t: p-hanatour-FP-0of3}
+          - {s: hanatour, p: "FP@1/3", t: p-hanatour-FP-1of3}
+          - {s: hanatour, p: "FP@2/3", t: p-hanatour-FP-2of3}
+          - {s: hanatour, p: "HM", t: p-hanatour-HM}
+          - {s: hanatour, p: "CP", t: p-hanatour-CP}
+          - {s: hanatour, p: "FF", t: p-hanatour-FF}
+          - {s: hanatour, p: "FG", t: p-hanatour-FG}
+          - {s: hanatour, p: "DG", t: p-hanatour-DG}
+          - {s: hanatour, p: "FCR", t: p-hanatour-FCR}
+          - {s: hanatour, p: "FTK", t: p-hanatour-FTK}
+          - {s: hanatour, p: "ZE", t: p-hanatour-ZE}
+          - {s: hanatour, p: "DP", t: p-hanatour-DP}
     runs-on: ubuntu-latest
     timeout-minutes: 340
     env:
@@ -19,10 +47,10 @@ jobs:
           openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass env:K -in a.bin -out a.tgz
           tar xzf a.tgz
           pip install -q httpx python-dotenv
-          python3 run.py ${{ matrix.s }} out.gz
+          python3 run.py ${{ matrix.s }} "${{ matrix.p }}" out.gz
       - run: openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:K -in out.gz -out data.bin
       - run: |
-          gh release view p-${{ matrix.s }} >/dev/null 2>&1 || gh release create p-${{ matrix.s }} --title p-${{ matrix.s }} --notes ""
-          gh release upload p-${{ matrix.s }} data.bin --clobber
+          gh release view ${{ matrix.t }} >/dev/null 2>&1 || gh release create ${{ matrix.t }} --title ${{ matrix.t }} --notes ""
+          gh release upload ${{ matrix.t }} data.bin --clobber
         env:
           GH_TOKEN: ${{ github.token }}
