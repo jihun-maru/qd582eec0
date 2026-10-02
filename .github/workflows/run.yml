@@ -9,7 +9,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {s: ttang, p: "all", t: p-ttang-all}
           - {s: modetour, p: "0/3", t: p-modetour-0of3}
           - {s: modetour, p: "1/3", t: p-modetour-1of3}
           - {s: modetour, p: "2/3", t: p-modetour-2of3}
