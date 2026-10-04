@@ -22,12 +22,22 @@ jobs:
           - {s: ttang, p: "list@9/12", t: p-ttang-list-9of12}
           - {s: ttang, p: "list@10/12", t: p-ttang-list-10of12}
           - {s: ttang, p: "list@11/12", t: p-ttang-list-11of12}
-          - {s: modetour, p: "0/6", t: p-modetour-0of6}
-          - {s: modetour, p: "1/6", t: p-modetour-1of6}
-          - {s: modetour, p: "2/6", t: p-modetour-2of6}
-          - {s: modetour, p: "3/6", t: p-modetour-3of6}
-          - {s: modetour, p: "4/6", t: p-modetour-4of6}
-          - {s: modetour, p: "5/6", t: p-modetour-5of6}
+          - {s: modetour, p: "0/16", t: p-modetour-0of16}
+          - {s: modetour, p: "1/16", t: p-modetour-1of16}
+          - {s: modetour, p: "2/16", t: p-modetour-2of16}
+          - {s: modetour, p: "3/16", t: p-modetour-3of16}
+          - {s: modetour, p: "4/16", t: p-modetour-4of16}
+          - {s: modetour, p: "5/16", t: p-modetour-5of16}
+          - {s: modetour, p: "6/16", t: p-modetour-6of16}
+          - {s: modetour, p: "7/16", t: p-modetour-7of16}
+          - {s: modetour, p: "8/16", t: p-modetour-8of16}
+          - {s: modetour, p: "9/16", t: p-modetour-9of16}
+          - {s: modetour, p: "10/16", t: p-modetour-10of16}
+          - {s: modetour, p: "11/16", t: p-modetour-11of16}
+          - {s: modetour, p: "12/16", t: p-modetour-12of16}
+          - {s: modetour, p: "13/16", t: p-modetour-13of16}
+          - {s: modetour, p: "14/16", t: p-modetour-14of16}
+          - {s: modetour, p: "15/16", t: p-modetour-15of16}
           - {s: ybtour, p: "PKG@0/3", t: p-ybtour-PKG-0of3}
           - {s: ybtour, p: "PKG@1/3", t: p-ybtour-PKG-1of3}
           - {s: ybtour, p: "PKG@2/3", t: p-ybtour-PKG-2of3}
@@ -40,18 +50,27 @@ jobs:
           - {s: onlinetour, p: "wf", t: p-onlinetour-wf}
           - {s: onlinetour, p: "wm", t: p-onlinetour-wm}
           - {s: onlinetour, p: "wk", t: p-onlinetour-wk}
-          - {s: hanatour, p: "FP@0/6", t: p-hanatour-FP-0of6}
-          - {s: hanatour, p: "FP@1/6", t: p-hanatour-FP-1of6}
-          - {s: hanatour, p: "FP@2/6", t: p-hanatour-FP-2of6}
-          - {s: hanatour, p: "FP@3/6", t: p-hanatour-FP-3of6}
-          - {s: hanatour, p: "FP@4/6", t: p-hanatour-FP-4of6}
-          - {s: hanatour, p: "FP@5/6", t: p-hanatour-FP-5of6}
+          - {s: hanatour, p: "FP@0/12", t: p-hanatour-FP-0of12}
+          - {s: hanatour, p: "FP@1/12", t: p-hanatour-FP-1of12}
+          - {s: hanatour, p: "FP@2/12", t: p-hanatour-FP-2of12}
+          - {s: hanatour, p: "FP@3/12", t: p-hanatour-FP-3of12}
+          - {s: hanatour, p: "FP@4/12", t: p-hanatour-FP-4of12}
+          - {s: hanatour, p: "FP@5/12", t: p-hanatour-FP-5of12}
+          - {s: hanatour, p: "FP@6/12", t: p-hanatour-FP-6of12}
+          - {s: hanatour, p: "FP@7/12", t: p-hanatour-FP-7of12}
+          - {s: hanatour, p: "FP@8/12", t: p-hanatour-FP-8of12}
+          - {s: hanatour, p: "FP@9/12", t: p-hanatour-FP-9of12}
+          - {s: hanatour, p: "FP@10/12", t: p-hanatour-FP-10of12}
+          - {s: hanatour, p: "FP@11/12", t: p-hanatour-FP-11of12}
           - {s: hanatour, p: "HM", t: p-hanatour-HM}
           - {s: hanatour, p: "CP", t: p-hanatour-CP}
-          - {s: hanatour, p: "FF@0/2", t: p-hanatour-FF-0of2}
-          - {s: hanatour, p: "FF@1/2", t: p-hanatour-FF-1of2}
-          - {s: hanatour, p: "FG@0/2", t: p-hanatour-FG-0of2}
-          - {s: hanatour, p: "FG@1/2", t: p-hanatour-FG-1of2}
+          - {s: hanatour, p: "FF@0/4", t: p-hanatour-FF-0of4}
+          - {s: hanatour, p: "FF@1/4", t: p-hanatour-FF-1of4}
+          - {s: hanatour, p: "FF@2/4", t: p-hanatour-FF-2of4}
+          - {s: hanatour, p: "FF@3/4", t: p-hanatour-FF-3of4}
+          - {s: hanatour, p: "FG@0/3", t: p-hanatour-FG-0of3}
+          - {s: hanatour, p: "FG@1/3", t: p-hanatour-FG-1of3}
+          - {s: hanatour, p: "FG@2/3", t: p-hanatour-FG-2of3}
           - {s: hanatour, p: "DG", t: p-hanatour-DG}
           - {s: hanatour, p: "FCR", t: p-hanatour-FCR}
           - {s: hanatour, p: "FTK", t: p-hanatour-FTK}
@@ -74,3 +93,4 @@ jobs:
           gh release upload ${{ matrix.t }} data.bin --clobber
         env:
           GH_TOKEN: ${{ github.token }}
+      - run: test ! -f failed
