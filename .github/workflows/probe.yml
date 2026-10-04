@@ -1,0 +1,22 @@
+name: probe
+on:
+  workflow_dispatch:
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2, 3, 4, 5, 6]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+          D=$(python3 -c "from datetime import date,timedelta;d=date.today();print(','.join((d+timedelta(i)).strftime('%Y%m%d') for i in range(31)))")
+          curl -s https://api.ipify.org; echo
+          for i in 1 2 3; do
+            curl -s -o t.html -w "theme %{http_code} %{time_total}s %{size_download}B\n" -A "$UA" "https://www.ttang.com/product/pkg/themeList.do?themeKind=URGENT&majorCategoryCd=C003&scale=100&page=1"
+            curl -s -o s.html -w "search %{http_code} %{time_total}s %{size_download}B " -A "$UA" "https://www.ttang.com/product/pkg/searchList.do?natCd=NC001&cityCd=CC003&departureDateList=$D&scale=5000"
+            echo "rows=$(grep -o 'id=\"search_list_2_' s.html | wc -l)"
+            sleep 5
+          done
