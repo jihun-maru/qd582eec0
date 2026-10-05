@@ -1,6 +1,11 @@
 name: run
 on:
   workflow_dispatch:
+    inputs:
+      sources:
+        description: "이 소스만(쉼표, 예: ttang,onlinetour). 비우면 전부"
+        required: false
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -80,17 +85,24 @@ jobs:
     timeout-minutes: 340
     env:
       K: ${{ secrets.K }}
+      # 2026-10-05: 실패한 소스만 다시(services/packages.gh_dispatch(sources)) -- 해당 없는 작업은 단계를 다 건너뛰고 바로 끝난다
+      RUN: ${{ inputs.sources == '' || contains(format(',{0},', inputs.sources), format(',{0},', matrix.s)) }}
     steps:
       - uses: actions/checkout@v4
-      - run: |
+        if: env.RUN == 'true'
+      - if: env.RUN == 'true'
+        run: |
           openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass env:K -in a.bin -out a.tgz
           tar xzf a.tgz
           pip install -q httpx python-dotenv
           python3 run.py ${{ matrix.s }} "${{ matrix.p }}" out.gz
-      - run: openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:K -in out.gz -out data.bin
-      - run: |
+      - if: env.RUN == 'true'
+        run: openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:K -in out.gz -out data.bin
+      - if: env.RUN == 'true'
+        run: |
           gh release view ${{ matrix.t }} >/dev/null 2>&1 || gh release create ${{ matrix.t }} --title ${{ matrix.t }} --notes ""
           gh release upload ${{ matrix.t }} data.bin --clobber
         env:
           GH_TOKEN: ${{ github.token }}
-      - run: test ! -f failed
+      - if: env.RUN == 'true'
+        run: test ! -f failed
